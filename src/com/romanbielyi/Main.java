@@ -1,6 +1,7 @@
 package com.romanbielyi;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
 
         List<Car> cars = new ArrayList<>();
 
-        Map<UUID, Car> uniqueThreeMatchedCars = new LinkedHashMap<>();
+        Map<UUID, Car> finalMatchedCars;
 
         for (int i = 0; i < 1000; i++) {
             cars.add(carGenerator.generateCar());
@@ -22,9 +23,9 @@ public class Main {
             System.out.println(car + "\n");
         }
 
-       List<Car> matchedCars =  cars.stream()
+        List<Car> matchedCars = cars.stream()
                 .filter(car -> car.getBrand() == Car.CarBrand.TESLA || car.getBrand() == Car.CarBrand.AUDI)
-                .filter(car -> car.getYear() < 2018 && car.getMileage() < 40000)
+                .filter(car -> car.getYear() > 2018 && car.getMileage() < 40000)
                 .sorted(Comparator.comparing(Car::getPrice).reversed())
                 .collect(Collectors.toList());
 
@@ -32,25 +33,26 @@ public class Main {
             System.out.println("****** No matching cars ******");
         } else {
             System.out.println("****** Tesla and/or AUDI cars with year < 2018 and mileage " +
-                    "< 40000 that sorted by price in ascending order ******");
+                    "< 40000 that sorted by price in descending order ******");
             for (Car car : matchedCars) {
                 System.out.println(car);
             }
         }
 
-        if (matchedCars.size() == 3) {
-            matchedCars = matchedCars.stream().sorted(Comparator.comparing(Car::getPrice)).collect(Collectors.toList());
-            for (Car car : matchedCars) {
-                uniqueThreeMatchedCars.put(car.getId(), car);
-            }
+        finalMatchedCars = matchedCars.stream()
+                .sorted(Comparator.comparing(Car::getPrice))
+                .limit(3)
+                .collect(Collectors.toMap(Car::getId,
+                        Function.identity(),
+                        (oldValue, newValue) -> oldValue,
+                        LinkedHashMap::new));
 
-        }
 
-        if (uniqueThreeMatchedCars.isEmpty()) {
-            System.out.println("****** No three matching cars ******");
+        if (finalMatchedCars.isEmpty()) {
+            System.out.println("****** No final matching cars ******");
         } else {
-            System.out.println(" ****** Three matching cars ******");
-            for (Car car : uniqueThreeMatchedCars.values()) {
+            System.out.println(" ****** Final matching cars ******");
+            for (Car car : finalMatchedCars.values()) {
                 System.out.println(car);
             }
         }

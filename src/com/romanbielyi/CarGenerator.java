@@ -36,10 +36,10 @@ public class CarGenerator {
         return (int) (Math.random() * (maxMileage - minMileage + 1) + minMileage);
     }
 
-    private double generatePrice() {
-        double minPrice = 60000;
-        double maxPrice = 400000;
-        return (Math.random() * (maxPrice - minPrice + 1) + minPrice);
+    private int generatePrice() {
+        int minPrice = 60000;
+        int maxPrice = 400000;
+        return (int) (Math.random() * (maxPrice - minPrice + 1) + minPrice);
     }
 
     public Car generateCar() {
@@ -59,11 +59,11 @@ class Car {
     private CarBrand brand;
     private int year;
     private int mileage;
-    private double price;
+    private int price;
 
     @Override
     public String toString() {
-        return String.format("ID: %s\nBRAND: %s\nYEAR: %d\nMILEAGE: %d\nPRICE: %f\n",
+        return String.format("ID: %s\nBRAND: %s\nYEAR: %d\nMILEAGE: %d\nPRICE: %d\n",
                 id.toString(),
                 brand,
                 year,
@@ -111,11 +111,11 @@ class Car {
         return mileage;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 }
