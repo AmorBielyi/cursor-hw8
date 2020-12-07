@@ -32,7 +32,7 @@ public class Main {
         if (matchedCars.isEmpty()) {
             System.out.println("****** No matching cars ******");
         } else {
-            System.out.println("****** Tesla and/or AUDI cars with year < 2018 and mileage " +
+            System.out.println("****** Tesla and/or AUDI cars with year > 2018 and mileage " +
                     "< 40000 that sorted by price in descending order ******");
             for (Car car : matchedCars) {
                 System.out.println(car);
