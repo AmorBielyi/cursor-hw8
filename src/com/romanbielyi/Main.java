@@ -13,7 +13,7 @@ public class Main {
 
         Map<UUID, Car> uniqueThreeMatchedCars = new LinkedHashMap<>();
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 1000; i++) {
             cars.add(carGenerator.generateCar());
         }
 
@@ -24,7 +24,7 @@ public class Main {
 
        List<Car> matchedCars =  cars.stream()
                 .filter(car -> car.getBrand() == Car.CarBrand.TESLA || car.getBrand() == Car.CarBrand.AUDI)
-                .filter(car -> car.getYear() < 2018 && car.getMileage() < 40000d)
+                .filter(car -> car.getYear() < 2018 && car.getMileage() < 40000)
                 .sorted(Comparator.comparing(Car::getPrice).reversed())
                 .collect(Collectors.toList());
 

@@ -30,10 +30,10 @@ public class CarGenerator {
         return (int) (Math.random() * (currentYear - minYear + 1) + minYear);
     }
 
-    private double generateMileage() {
-        double minMileage = 0.0;
-        double maxMileage = 55000;
-        return (Math.random() * (maxMileage - minMileage + 1) + minMileage);
+    private int generateMileage() {
+        int minMileage = 0;
+        int maxMileage = 55000;
+        return (int) (Math.random() * (maxMileage - minMileage + 1) + minMileage);
     }
 
     private double generatePrice() {
@@ -58,12 +58,12 @@ class Car {
     private UUID id;
     private CarBrand brand;
     private int year;
-    private double mileage;
+    private int mileage;
     private double price;
 
     @Override
     public String toString() {
-        return String.format("ID: %s\nBRAND: %s\nYEAR: %d\nMILEAGE: %f\nPRICE: %f\n",
+        return String.format("ID: %s\nBRAND: %s\nYEAR: %d\nMILEAGE: %d\nPRICE: %f\n",
                 id.toString(),
                 brand,
                 year,
@@ -76,7 +76,7 @@ class Car {
         AUDI,
         BMW,
         TOYOTA,
-        NISAN
+        NISSAN
     }
 
     public void setId(UUID id) {
@@ -103,11 +103,11 @@ class Car {
         return year;
     }
 
-    public void setMileage(double mileage) {
+    public void setMileage(int mileage) {
         this.mileage = mileage;
     }
 
-    public double getMileage() {
+    public int getMileage() {
         return mileage;
     }
 
