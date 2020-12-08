@@ -24,7 +24,7 @@ public class Main {
         }
 
         List<Car> matchedCars = cars.stream()
-                .filter(car -> car.getBrand() == Car.CarBrand.TESLA || car.getBrand() == Car.CarBrand.AUDI)
+                .filter(car -> car.getBrand() == CarBrand.TESLA || car.getBrand() == CarBrand.AUDI)
                 .filter(car -> car.getYear() > 2018 && car.getMileage() < 40000)
                 .sorted(Comparator.comparing(Car::getPrice).reversed())
                 .collect(Collectors.toList());
